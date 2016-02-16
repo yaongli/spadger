@@ -1,0 +1,74 @@
+{% extends "theme/in_base.html" %}
+
+{% load staticfiles %}
+{% load thumbnail %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}用户管理{% endblock %}
+
+{% block styles %}
+ <!-- Data Tables -->
+    <link href="{% static 'theme/inspinia/css/plugins/dataTables/dataTables.bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'theme/inspinia/css/plugins/dataTables/dataTables.responsive.css' %}" rel="stylesheet">
+    <link href="{% static 'theme/inspinia/css/plugins/dataTables/dataTables.tableTools.min.css' %}" rel="stylesheet">
+{% endblock styles %}
+
+{% block container %}
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover dataTables-example" >
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Full Name</th>
+                <th>Bio</th>
+                <th>Email</th>
+                <th>Email Verified</th>
+                <th>Is Active</th>
+                <th>Is Staff</th>
+                <th>Is Super</th>
+                <th>Date Joined</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in user_list %}
+                <tr>
+                    <td><img src="{% thumbnail user.profile.picture|default:'default_profile.png' 30x30 crop %}" alt=""
+                             style="border-radius: 15px;"/></td>
+                    <td>{{ user.get_full_name|truncatechars:20 }}</td>
+                    <td>{{ user.profile.bio }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.profile.email_verified }}</td>
+                    <td>{{ user.is_active }}</td>
+                    <td>{{ user.is_staff }}</td>
+                    <td>{{ user.is_superuser }}</td>
+                    <td>{{ user.date_joined|date:"Y-m-d" }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if page_obj %}
+        {% include "pagination.html" %}
+    {% endif %}
+
+{% endblock container %}
+
+{% block scripts %}
+    <!-- Data Tables -->
+    <script src="{% static 'theme/inspinia/js/plugins/dataTables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'theme/inspinia/js/plugins/dataTables/dataTables.bootstrap.js' %}"></script>
+    <script src="{% static 'theme/inspinia/js/plugins/dataTables/dataTables.responsive.js' %}"></script>
+    <script src="{% static 'theme/inspinia/js/plugins/dataTables/dataTables.tableTools.min.js' %}"></script>
+    
+    <script>
+        $(document).ready(function() {
+            $('.dataTables-example').DataTable({
+                "dom": 'lTfigt',
+                "tableTools": {
+                    "sSwfPath": "{% static 'theme/inspinia/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf' %}"
+                }
+            });
+        });
+    </script>
+{% endblock scripts %}

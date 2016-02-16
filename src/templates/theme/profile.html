@@ -1,0 +1,30 @@
+{% load staticfiles %}
+{% load thumbnail %}
+
+<li class="nav-header">
+    <div class="dropdown profile-element">
+        <span>
+            <img src="{% thumbnail user.profile.picture|default:'default_profile.png' 30x30 crop %}" alt=""
+                 class="img-circle"/>
+             </span>
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <span class="clear"> 
+                <span class="block m-t-xs"> 
+                    <strong class="font-bold">{{ user.get_full_name }}</strong>
+             </span> 
+                <span class="text-muted text-xs block">Art Director <b
+                        class="caret"></b></span> 
+            </span>
+        </a>
+        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+            <li><a href="{% static 'theme/inspinia/profile.html' %}">Profile</a></li>
+            <li><a href="{% static 'theme/inspinia/contacts.html' %}">Contacts</a></li>
+            <li><a href="{% static 'theme/inspinia/mailbox.html' %}">Mailbox</a></li>
+            <li class="divider"></li>
+            <li><a href="{% static 'theme/inspinia/login.html' %}">Logout</a></li>
+        </ul>
+    </div>
+    <div class="logo-element">
+        IN+
+    </div>
+</li>
