@@ -31,6 +31,7 @@ NEWS = {
     1: u'chiphell',
     2: u'freebuf',
     3: u'cnBeta',
+    4: u'jianshu',
 }
 
 

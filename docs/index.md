@@ -16,7 +16,7 @@ bind-address            = 0.0.0.0 #127.0.0.1
 
 ```
 $ mysql -u root -p
-mysql>  create database spadger;
+mysql>  create database spadger DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 mysql>  CREATE USER 'spadger'@'%' IDENTIFIED BY 'spadger2016';
 mysql>  GRANT ALL PRIVILEGES ON spadger.* TO 'spadger'@'%';
 mysql>  FLUSH PRIVILEGES;
