@@ -61,3 +61,5 @@ Desktop.ini
 venv/
 src.zip
 ./venv/
+src/spadger/settings/fabric_settings.py
+src/spadger/settings/local.env
